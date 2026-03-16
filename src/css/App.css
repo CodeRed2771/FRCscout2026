@@ -1,0 +1,274 @@
+#root {
+  margin: 0 auto;
+}
+
+.logo-main {
+  width: 350px;
+}
+
+.main-menu {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; 
+  width: 350px;
+}
+
+.nav-btn {
+  background-color: #333;
+  border: 1px solid var(--med-accent);
+  padding: 8px;
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 1.8px;
+  outline: 0;
+  border-radius: 10px;
+  color: unset;
+  text-decoration: none;
+  width: 100%;
+}
+
+.nav-btn:hover {
+  scale: 1.08;
+}
+
+.app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  width: 95vw;
+  height: 95vh;
+  max-width: 900px;
+  background-color: #303030;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid var(--dark-accent);
+  position: relative;
+  padding-top: 10px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.next,
+.back {
+  width: unset;
+  padding-left: 18px;
+  padding-right: 18px;
+  border-radius: 6px;
+  position: fixed;
+  bottom: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+.back {
+  left: 10px;
+}
+
+.input-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.input-page h1 {
+  font-weight: 400;
+  letter-spacing: 1.4px;
+  margin-bottom: 10px;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.input-group label {
+  font-size: 18px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-group input {
+  padding: 5px;
+  font-size: 17px;
+  border-radius: 5px;
+  text-align: center;
+  border: 1px solid var(--med-accent);
+}
+
+.input-group input:focus {
+  outline: 1px solid var(--light-accent);
+}
+
+.input-group input[type="number"] {
+  width: 100px;
+  text-align: center;
+}
+
+.select-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+} 
+
+.select-buttons button {
+  padding: 7px;
+  border-radius: 5px;
+  font-size: 17px;
+  min-width: 35px;
+  border: 1px solid var(--med-accent);
+}
+
+.select-buttons button:hover {
+  border: 1px solid var(--light-accent);
+  scale: 1.06;
+}
+
+.form button {
+  background-color: #404040;
+}
+
+.counter-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.counter-button {
+  padding: 0px;
+  width: 50px;
+  font-size: 29px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid var(--med-accent);
+}
+
+.count {
+  font-size: 20px;
+}
+
+.counter-button button:hover {
+  border: 1px solid var(--light-accent);
+  scale: 1.06;
+}
+
+.startpos {
+  width: 80%;
+}
+
+.input-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--light-accent);
+  scale: 1;
+}
+
+.buttonSelected {
+  scale: 1.15;
+  border: 1px solid var(--light-accent) !important;
+  background-color: #555 !important;
+}
+
+.shooting {
+  padding: 20px;
+  border-radius: 8px;
+  font-size: 18px;
+  width: 300px;
+  height: 100px;
+}
+
+.climbing {
+  padding: 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 150px;
+  height: 50px;
+  margin-top: 0px;
+}
+
+.disabled-true {
+  border: 2px solid #333;
+  scale: 0.95;
+  opacity: 0.6;
+}
+
+.clock {
+  font-size: 35px;
+  font-weight: 600;
+  border: 1px solid white;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.clockContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.clockContainer button {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+/* if the clock is not running */
+.clock-false {
+  opacity: 0.3;
+}
+
+.input-group textarea {
+  height: 100px;
+  width: 250px;
+}
+
+.submit {
+  width: 200px;
+  height: 50px;
+  border-radius: 10px;
+  padding: 20px;
+  border-radius: 8px;
+  font-size: 18px;
+}
+
+#send {
+  color: lightgreen;
+  font-weight: 500;
+}
