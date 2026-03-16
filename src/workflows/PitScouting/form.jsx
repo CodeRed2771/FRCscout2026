@@ -4,7 +4,7 @@ import '../../css/App.css'
 function PitScoutingForm() {
   return (
     <>
-      not reayd yet
+      not ready yet
     </>
   )
 }
