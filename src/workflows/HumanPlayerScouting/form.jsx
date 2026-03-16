@@ -16,9 +16,10 @@ function HumanPlayerForm({sethpMatches}) {
 
   const [formData, setFormData] = useLocalStorage('formData',
     {
-        scouter: "",
-        matchNum: 1,
-        scores: 0
+      scouter: "",
+      matchNum: 1,
+      alliance: "",
+      scores: 0
     }
   );
 

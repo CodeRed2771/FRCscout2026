@@ -21,6 +21,12 @@ function Form({formData: formData, setFormData: setFormData, submitMatch}) {
             value={formData.matchNum} 
             onChange={(val) => setFormData({...formData, matchNum: val})} 
         />
+        <SelectButtons
+          label="Alliance"
+          values={["Red", "Blue"]}
+          selected={formData.alliance}
+          onClick={(val) => {setFormData({...formData, alliance: val})}}
+        />
         <Counter
             label="Shots Made"
             count={formData.scores}
