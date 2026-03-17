@@ -4,7 +4,7 @@ import '../../css/App.css'
 function PitScoutingForm() {
   return (
     <>
-      not ready yet
+      dear kam, that was parker.
     </>
   )
 }
