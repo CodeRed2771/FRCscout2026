@@ -53,7 +53,7 @@ function Teleop({disabled, setDisabled, formData, setFormData, isActive, matchTi
         values={["Yes", "No"]}
         disabled={disabled.teleClimbDetails}
         selected={formData.teleClimb.success}
-        onClick={(val) => setFormData({...formData, teleClimb: {...formData.teleClimb, success: val, successTime: matchTimer}})}
+        onClick={(val) => setFormData({...formData, teleClimb: {...formData.teleClimb, success: val, successTime: val === "Yes" ? matchTimer : ""}})}
       />
     </div>
   )

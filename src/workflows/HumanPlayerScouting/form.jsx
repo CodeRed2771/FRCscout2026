@@ -14,7 +14,7 @@ function HumanPlayerForm({sethpMatches}) {
     });
   }
 
-  const [formData, setFormData] = useLocalStorage('formData',
+  const [formData, setFormData] = useLocalStorage('hpformData',
     {
       scouter: "",
       matchNum: 1,

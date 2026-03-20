@@ -23,7 +23,7 @@ function MatchScoutingForm({matches, setMatches}) {
       autoClimb: {
         startTime: "",
         location: "",
-        success: "",
+        success: "No",
         successTime: ""
       },
       teleCycles: {
@@ -34,7 +34,7 @@ function MatchScoutingForm({matches, setMatches}) {
         startTime: "",
         location: "",
         level: "",
-        success: "",
+        success: "No",
         successTime: ""
       },
       comments:"",
@@ -60,7 +60,7 @@ function MatchScoutingForm({matches, setMatches}) {
     setBackText("Back To Main")
   }
 
-  const [formData, setFormData] = useLocalStorage('formData',
+  const [formData, setFormData] = useLocalStorage('matchformData',
     {
       scouter: "",
       teamNum: 0,
@@ -135,6 +135,9 @@ useEffect(() => {
           setTimeout(() => {
             setIsPaused(false);
             setCurrentPage(2);
+            if(disabled.autoCycle === false) {
+              setDisabled({...disabled, autoClimb: false, autoFuel: false, autoCycle: true}), setFormData({...formData, autoCycles: {...formData.autoCycles, stops: [...formData.autoCycles.stops, matchTimer]}}) 
+            }
           }, 3000);
           return 20;
         }

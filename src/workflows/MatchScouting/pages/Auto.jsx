@@ -45,7 +45,7 @@ function Auto({disabled, setDisabled, formData, setFormData, isActive, matchTime
           values={["Yes", "No"]}
           disabled={disabled.autoClimbDetails}
           selected={formData.autoClimb.success}
-          onClick={(val) => {setFormData({...formData, autoClimb: {...formData.autoClimb, success: val, successTime: matchTimer}})}}
+          onClick={(val) => {setFormData({...formData, autoClimb: {...formData.autoClimb, success: val, successTime: val === "Yes" ? matchTimer : ""}})}}
         />
     </div>
   )

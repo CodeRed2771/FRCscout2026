@@ -13,13 +13,13 @@ function App() {
   let sending = false;
 
   const uploadData = async (data, hpdata) => {
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby0ukUsjvVbjAD6AKmeZgbELwMVitZYTLXMOwWWAhGxwJrd61SYXmfNoFjzqFCk-x3sOA/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzo0CRIGmzzIkrSdPu0PD_spJY5Oo-C3zVy3HjerNahyf6twQcLK-Fru79RgPCjWnkE0Q/exec";
     const payload = {
       matchData: data,
       hpData: hpdata
     };
 
-    console.log(hpdata)
+    console.log(data)
     
     if(sending != true) {
       sending = true;
