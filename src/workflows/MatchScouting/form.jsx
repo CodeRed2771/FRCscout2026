@@ -13,7 +13,7 @@ function MatchScoutingForm({matches, setMatches}) {
     setMatches(prevMatches => [...prevMatches, formData]);
     setFormData({
       scouter: formData.scouter,
-      teamNum: 0,
+      teamNum: "",
       matchNum: Number(formData.matchNum) + 1,
       startPos: "",
       autoCycles: {
@@ -63,7 +63,7 @@ function MatchScoutingForm({matches, setMatches}) {
   const [formData, setFormData] = useLocalStorage('matchformData',
     {
       scouter: "",
-      teamNum: 0,
+      teamNum: "",
       matchNum: 1,
       startPos: "",
       autoCycles: {
@@ -200,7 +200,7 @@ useEffect(() => {
     if (window.confirm("Are you sure you want to reset the match? All current data will be lost.")) {
       setFormData({
         scouter: formData.scouter, // Keeps the scouter name so they don't have to retype it
-        teamNum: 0,
+        teamNum: "",
         matchNum: formData.matchNum, // Keeps the current match number
         startPos: "",
         autoCycles: { starts: [], stops: [] },
