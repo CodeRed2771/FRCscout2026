@@ -1,5 +1,11 @@
-#root {
+:root {
   margin: 0 auto;
+}
+
+input, textarea, button, select {
+  background-color: transparent; /* Or a specific dark hex code like #404040 */
+  color: inherit; /* This pulls your white text color from :root */
+  font-family: inherit; /* Makes sure they use Montserrat */
 }
 
 .logo-main {
@@ -29,7 +35,7 @@
   border: 1px solid var(--med-accent);
   padding: 8px;
   text-align: center;
-  font-size: 18px;
+  font-size: 22px;
   letter-spacing: 1.8px;
   outline: 0;
   border-radius: 10px;
@@ -71,8 +77,8 @@ button {
 .next,
 .back {
   width: unset;
-  padding-left: 18px;
-  padding-right: 18px;
+  padding-left: 22px;
+  padding-right: 22px;
   border-radius: 6px;
   position: fixed;
   bottom: 10px;
@@ -94,6 +100,11 @@ button {
   gap: 12px;
 }
 
+.input-page * {
+    flex: 1;
+
+}
+
 .input-page h1 {
   font-weight: 400;
   letter-spacing: 1.4px;
@@ -107,7 +118,7 @@ button {
 }
 
 .input-group label {
-  font-size: 18px;
+  font-size: 22px;
 }
 
 input::-webkit-outer-spin-button,
@@ -117,8 +128,8 @@ input::-webkit-inner-spin-button {
 }
 
 .input-group input {
-  padding: 5px;
-  font-size: 17px;
+  padding: 8px;
+  font-size: 19px;
   border-radius: 5px;
   text-align: center;
   border: 1px solid var(--med-accent);
@@ -129,7 +140,8 @@ input::-webkit-inner-spin-button {
 }
 
 .input-group input[type="number"] {
-  width: 100px;
+  width: 180px;
+  height: 50px;
   text-align: center;
 }
 
@@ -143,7 +155,8 @@ input::-webkit-inner-spin-button {
   padding: 7px;
   border-radius: 5px;
   font-size: 17px;
-  min-width: 35px;
+  min-width: 65px;
+  min-height: 45px;
   border: 1px solid var(--med-accent);
 }
 
@@ -204,17 +217,17 @@ input::-webkit-inner-spin-button {
 .shooting {
   padding: 20px;
   border-radius: 8px;
-  font-size: 18px;
-  width: 300px;
-  height: 100px;
+  font-size: 22px;
+  width: 500px;
+  height: 200px;
 }
 
 .climbing {
   padding: 20px;
   border-radius: 8px;
   font-size: 16px;
-  width: 150px;
-  height: 50px;
+  width: 250px;
+  height: 80px;
   margin-top: 0px;
 }
 
@@ -255,8 +268,8 @@ input::-webkit-inner-spin-button {
 }
 
 .input-group textarea {
-  height: 100px;
-  width: 250px;
+  height: 150px;
+  width: 450px;
 }
 
 .submit {
@@ -265,10 +278,15 @@ input::-webkit-inner-spin-button {
   border-radius: 10px;
   padding: 20px;
   border-radius: 8px;
-  font-size: 18px;
+  font-size: 22px;
 }
 
 #send {
   color: lightgreen;
   font-weight: 500;
+}
+
+.match-controls button {
+  padding: 8px;
+  border-radius: 10px;
 }

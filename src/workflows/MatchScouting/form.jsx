@@ -108,9 +108,9 @@ function MatchScoutingForm({matches, setMatches}) {
 
   const [currentPage, setCurrentPage] = useLocalStorage('currentPage', 0);
   const [backText, setBackText] = useLocalStorage('backText',"Back To Main");
-  const [matchTimer, setMatchTimer] = useLocalStorage('matchTimer',0);
-  const [isActive, setIsActive] = useLocalStorage('isActive', false);
-  const [isPaused, setIsPaused] = useLocalStorage('isPaused', false); // New state to handle the pause
+  const [matchTimer, setMatchTimer] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+  const [isPaused, setIsPaused] = useState(false); // New state to handle the pause
 
   let pages = [
     <PreMatch isActive={isActive} disabled={disabled} setDisabled={setDisabled} formData={formData} setFormData={setFormData}/>,
@@ -187,10 +187,73 @@ useEffect(() => {
     }
   };
 
-  return (
+  // Toggles the pause state on and off
+  const togglePause = () => {
+    // Only allow pausing if the match has actually started
+    if (isActive) {
+      setIsPaused(!isPaused);
+    }
+  };
+
+  // Resets the entire match to its initial state without incrementing the match number
+  const resetMatch = () => {
+    if (window.confirm("Are you sure you want to reset the match? All current data will be lost.")) {
+      setFormData({
+        scouter: formData.scouter, // Keeps the scouter name so they don't have to retype it
+        teamNum: 0,
+        matchNum: formData.matchNum, // Keeps the current match number
+        startPos: "",
+        autoCycles: { starts: [], stops: [] },
+        autoClimb: { startTime: "", location: "", success: "", successTime: "" },
+        teleCycles: { starts: [], stops: [] },
+        teleClimb: { startTime: "", location: "", level: "", success: "", successTime: "" },
+        comments: "",
+        defensePlayed: "No",
+        defenseRating: ""
+      });
+      setDisabled({
+        autoFuel: false,
+        autoCycle: true,
+        autoClimb: false,
+        nextBtn: false,
+        autoClimbDetails: true,
+        teleFuel: false,
+        teleCycle: true,
+        teleClimb: false,
+        teleClimbDetails: true,
+        defenseRating: true
+      });
+      setCurrentPage(0);
+      setMatchTimer(0);
+      setIsActive(false);
+      setIsPaused(false);
+      setBackText("Back To Main");
+    }
+  };
+
+return (
     <>
       <div className="form">
         <MatchClock disabled={(currentPage == 0)} timer={matchTimer} isActive={isActive} setIsActive={setIsActive}/>
+
+        {/* New Pause and Reset Buttons */}
+        <div style={{display: currentPage == 0 ? "none" : "flex", gap: '10px', justifyContent: 'center', margin: '0px 0'}} className="match-controls">
+          <button 
+            type="button" 
+            onClick={togglePause} 
+            disabled={!isActive} // Disabled if the timer hasn't started yet
+          >
+            {isPaused ? "Resume Match" : "Pause Match"}
+          </button>
+          
+          <button 
+            type="button" 
+            onClick={resetMatch}
+          >
+            Reset Match
+          </button>
+        </div>
+
         {renderPage()}
       </div>
 
