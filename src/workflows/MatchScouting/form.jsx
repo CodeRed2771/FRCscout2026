@@ -8,27 +8,41 @@ import PostMatch from './pages/PostMatch'
 import '../../css/App.css'
 import useLocalStorage from '../../utils/useLocalStorage';
 
-function MatchScoutingForm({matches, setMatches}) {
-  const submitMatch = () => {
-    setMatches(prevMatches => [...prevMatches, formData]);
+function MatchScoutingForm({matches, setMatches, TBAdata}) {
+  const submitMatch = async () => {
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbybdaASpBLSDEauSxvRpNhvoIA3iY_Jg7nRxIqp42YfYRjP9LDdZWgIQewSHeJVDvT3Xg/exec";
+    const payload = {
+      matchData: formData,
+      hpData: []
+    };
+    
+    try {
+      const response = await fetch(WEB_APP_URL, {
+        method: "POST",
+        mode: "no-cors", // Required for Google Apps Script redirects
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      console.log("Data successfully sent!");
+    } catch (error) {
+      setMatches(prevMatches => [...prevMatches, formData]);
+
+      console.log("Upload failed:", error);
+    }
+
     setFormData({
       scouter: formData.scouter,
       teamNum: "",
       matchNum: Number(formData.matchNum) + 1,
       startPos: "",
-      autoCycles: {
-        starts: [],
-        stops: []
-      },
       autoClimb: {
         startTime: "",
         location: "",
         success: "No",
         successTime: ""
-      },
-      teleCycles: {
-        starts: [],
-        stops: []
       },
       teleClimb: {
         startTime: "",
@@ -37,10 +51,19 @@ function MatchScoutingForm({matches, setMatches}) {
         success: "No",
         successTime: ""
       },
+      teleCycles: {
+        starts: [],
+        stops: []
+      },
+      autoCycles: {
+        starts: [],
+        stops: []
+      },
       comments:"",
       defensePlayed:"No",
       defenseRating:""
     });
+    
     setDisabled({
       autoFuel: false,
       autoCycle: true,
@@ -53,6 +76,7 @@ function MatchScoutingForm({matches, setMatches}) {
       teleClimbDetails: true,
       defenseRating: true
     });
+    
     setCurrentPage(0);
     setMatchTimer(0);
     setIsActive(false);
@@ -233,26 +257,8 @@ useEffect(() => {
 
 return (
     <>
-      <div className="form">
-        <MatchClock disabled={(currentPage == 0)} timer={matchTimer} isActive={isActive} setIsActive={setIsActive}/>
-
-        {/* New Pause and Reset Buttons */}
-        <div style={{display: currentPage == 0 ? "none" : "flex", gap: '10px', justifyContent: 'center', margin: '0px 0'}} className="match-controls">
-          <button 
-            type="button" 
-            onClick={togglePause} 
-            disabled={!isActive} // Disabled if the timer hasn't started yet
-          >
-            {isPaused ? "Resume Match" : "Pause Match"}
-          </button>
-          
-          <button 
-            type="button" 
-            onClick={resetMatch}
-          >
-            Reset Match
-          </button>
-        </div>
+      <div className="form tuff-load">
+        <MatchClock disabled={(currentPage == 0)} timer={matchTimer} isActive={isActive} setIsActive={setIsActive} togglePause={togglePause} resetMatch={resetMatch} isPaused={isPaused}/>
 
         {renderPage()}
       </div>

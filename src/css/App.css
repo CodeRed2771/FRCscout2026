@@ -3,7 +3,7 @@
 }
 
 input, textarea, button, select {
-  background-color: transparent; /* Or a specific dark hex code like #404040 */
+  background-color: #291e1e; /* Or a specific dark hex code like #404040 */
   color: inherit; /* This pulls your white text color from :root */
   font-family: inherit; /* Makes sure they use Montserrat */
 }
@@ -31,8 +31,8 @@ input, textarea, button, select {
 }
 
 .nav-btn {
-  background-color: #333;
-  border: 1px solid var(--med-accent);
+  background-color: #291919;
+  border: 2px solid var(--med-accent);
   padding: 8px;
   text-align: center;
   font-size: 22px;
@@ -42,6 +42,18 @@ input, textarea, button, select {
   color: unset;
   text-decoration: none;
   width: 100%;
+}
+
+.nav-btn-container {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+}
+
+.nav-btn-container .nav-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav-btn:hover {
@@ -60,12 +72,12 @@ input, textarea, button, select {
   width: 95vw;
   height: 95vh;
   max-width: 900px;
-  background-color: #303030;
+  background-color: #1a1515;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid var(--dark-accent);
+  border: 2px solid var(--light-accent);
   position: relative;
   padding-top: 10px;
 }
@@ -98,6 +110,7 @@ button {
   align-items: center;
   justify-content: center;
   gap: 12px;
+  padding-top: 10px;
 }
 
 .input-page * {
@@ -108,16 +121,20 @@ button {
 .input-page h1 {
   font-weight: 400;
   letter-spacing: 1.4px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .input-group {
   display: flex;
   gap: 10px;
   align-items: center;
+  min-width: 60%;
+  max-width: 90vw;
+  justify-content: center;
 }
 
 .input-group label {
+  text-align: right;
   font-size: 22px;
 }
 
@@ -132,7 +149,8 @@ input::-webkit-inner-spin-button {
   font-size: 19px;
   border-radius: 5px;
   text-align: center;
-  border: 1px solid var(--med-accent);
+  border: 2px solid var(--med-accent);
+  max-width: 300px;
 }
 
 .input-group input:focus {
@@ -154,50 +172,55 @@ input::-webkit-inner-spin-button {
 .select-buttons button {
   padding: 7px;
   border-radius: 5px;
-  font-size: 17px;
+  font-size: 20px;
   min-width: 65px;
   min-height: 45px;
-  border: 1px solid var(--med-accent);
+  border: 2px solid var(--med-accent);
 }
 
 .select-buttons button:hover {
-  border: 1px solid var(--light-accent);
+  border: 2px solid var(--light-accent);
   scale: 1.06;
 }
 
 .form button {
-  background-color: #404040;
+  background-color: #291e1e;
 }
 
 .counter-buttons {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  gap: 0px;
 }
 
 .counter-button {
   padding: 0px;
-  width: 50px;
-  font-size: 29px;
+  width: 80px;
+  height: 80px;
+  font-size: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  border: 1px solid var(--med-accent);
+  border: 2px solid var(--med-accent);
 }
 
 .count {
-  font-size: 20px;
+  font-size: 35px;
+  font-weight: 500;
+  text-align: center;
 }
 
 .counter-button button:hover {
-  border: 1px solid var(--light-accent);
+  border: 2px solid var(--light-accent);
   scale: 1.06;
 }
 
 .startpos {
   width: 80%;
+  border-radius: 10px;
+  border: 2px solid var(--med-accent);
 }
 
 .input-button {
@@ -210,8 +233,8 @@ input::-webkit-inner-spin-button {
 
 .buttonSelected {
   scale: 1.15;
-  border: 1px solid var(--light-accent) !important;
-  background-color: #555 !important;
+  border: 2px solid var(--light-accent) !important;
+  background-color: #582a2a !important;
 }
 
 .shooting {
@@ -232,7 +255,7 @@ input::-webkit-inner-spin-button {
 }
 
 .disabled-true {
-  border: 2px solid #333;
+  border: 2px solid #291919;
   scale: 0.95;
   opacity: 0.6;
 }
@@ -240,11 +263,14 @@ input::-webkit-inner-spin-button {
 .clock {
   font-size: 35px;
   font-weight: 600;
-  border: 1px solid white;
-  width: 100px;
+  border: 2px solid var(--light-accent);
+  width: auto;
   display: flex;
   justify-content: center;
   border-radius: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: rgb(255, 187, 187);
 }
 
 .clockContainer {
@@ -256,10 +282,26 @@ input::-webkit-inner-spin-button {
   margin-bottom: 10px;
 }
 
-.clockContainer button {
-  padding: 10px;
+.clock-controls {
+  display: flex;
+  gap: 5px;
+}
+
+.startbutton {
+  padding: 10px; 
   font-size: 16px;
   border-radius: 5px;
+  border: 2px solid var(--light-accent);
+}
+
+.clock-button {
+  border: none;
+  background-color: transparent !important;
+  padding: 0px;
+}
+
+.clock-button img {
+  width: 50px;
 }
 
 /* if the clock is not running */
@@ -270,10 +312,11 @@ input::-webkit-inner-spin-button {
 .input-group textarea {
   height: 150px;
   width: 450px;
+  border-radius: 8px;
 }
 
 .submit {
-  width: 200px;
+  min-width: 200px;
   height: 50px;
   border-radius: 10px;
   padding: 20px;
@@ -289,4 +332,68 @@ input::-webkit-inner-spin-button {
 .match-controls button {
   padding: 8px;
   border-radius: 10px;
+}
+
+.input-group select {
+  padding: 8px;
+  font-size: 18px;
+  border-radius: 6px;
+  background-color: #291919;
+}
+
+.leaderboard-page {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  overflow: scroll;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 9px 15px;
+    text-align: center;
+    border-bottom: 1px solid #444;
+}
+
+th {
+    background-color: #331c1c;
+    color: #ffffff;
+}
+
+tr {
+  background-color: #2a2a2a;
+}
+
+tr:hover {
+    background-color: #2a2a2a;
+    cursor: pointer;
+}
+
+/* Keyframes for a weighted entrance */
+@keyframes slideInTuff {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.tuff-load {
+  animation: slideInTuff 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }

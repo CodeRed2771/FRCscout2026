@@ -10,8 +10,8 @@ function Teleop({disabled, setDisabled, formData, setFormData, isActive, matchTi
   return (
     <div style={{pointerEvents: !isActive ? "none" : "unset", opacity: !isActive ? "0.5" : "1"}} className="input-page">
       <h1>Teleop</h1>
-      
-      <Button
+
+      <Button 
         label={"Start Shooting"}
         type="shooting"
         disabled={disabled.teleFuel}

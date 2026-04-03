@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import '../css/App.css'
+import play from "../assets/icons/play.svg"
+import restart from "../assets/icons/restart.svg"
+import pause from "../assets/icons/pause.svg"
 
-function MatchClock ({ timer, disabled, isActive, setIsActive }) {
+function MatchClock({ timer, disabled, isActive, setIsActive, resetMatch, togglePause, isPaused }) {
     let minutes;
     let seconds;
-    
-    if(timer < 20) {
+
+    if (timer < 20) {
         minutes = 0;
         seconds = 20 - timer;
     } else {
@@ -15,7 +18,7 @@ function MatchClock ({ timer, disabled, isActive, setIsActive }) {
     }
 
     const giveZeroes = (num) => {
-        if(String(num).length === 1) {
+        if (String(num).length === 1) {
             return "0" + num;
         } else {
             return num;
@@ -23,9 +26,28 @@ function MatchClock ({ timer, disabled, isActive, setIsActive }) {
     }
 
     return (
-        <div className={"clockContainer"} style={{display: disabled ? "none" : "flex"}}>
-            <div className={"clock" + " clock-"+ isActive}>{minutes}:{giveZeroes(seconds)}</div>
-            <button style={{display: isActive ? "none" : "flex"}} onClick={() => {setIsActive(true)}}>Start Match</button>
+        <div className={"clockContainer"} style={{ display: disabled ? "none" : "flex" }}>
+            <div className={"clock-controls" + " clock-" + isActive}>
+                <button
+                    type="button"
+                    onClick={togglePause}
+                    disabled={!isActive} // Disabled if the timer hasn't started yet
+                    className="clock-button"
+                >
+                    {isPaused ? <img src={play}></img> : <img src={pause}></img>}
+                </button>
+                <div className={"clock"}>
+                    {minutes}:{giveZeroes(seconds)}
+                </div>
+                <button
+                    type="button"
+                    onClick={resetMatch}
+                    className="clock-button"
+                >
+                    <img src={restart}></img>
+                </button>
+            </div>
+            <button className="startbutton" style={{ display: isActive ? "none" : "flex" }} onClick={() => { setIsActive(true) }}>Start Match</button>
         </div>
     )
 }

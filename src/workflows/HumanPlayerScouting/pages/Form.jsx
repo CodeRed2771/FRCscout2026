@@ -10,7 +10,7 @@ import StartPos from '../../../assets/startpos.jpg'
 function Form({formData: formData, setFormData: setFormData, submitMatch}) {
   return (
     <div className="input-page">
-        <h1>Pre-Match</h1>
+        <h1>Human Player Scouting</h1>
         <TextInput 
             label="Scouter" 
             value={formData.scouter} 

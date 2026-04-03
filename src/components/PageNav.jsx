@@ -4,8 +4,8 @@ import '../css/App.css'
 function PageNav ({ handleNext, handleBack, backText, disabled, nextButton }) {
     return (
         <>
-            <button hidden={nextButton} className={"nav-btn next "} onClick={handleNext}>Next</button>
-            <button className="nav-btn back" onClick={handleBack}>{backText}</button>
+            <button hidden={nextButton} className={"nav-btn next tuff-load"} onClick={handleNext}>Next</button>
+            <button className="nav-btn back tuff-load" onClick={handleBack}>{backText}</button>
         </>
     )
 }

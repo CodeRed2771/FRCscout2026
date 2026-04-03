@@ -25,7 +25,7 @@ function Auto({disabled, setDisabled, formData, setFormData, isActive, matchTime
           disabled={disabled.autoCycle}
         />
 
-        <Button 
+        <Button  
           label="Start Climbing"
           type="climbing"
           onClick={() => {setDisabled({...disabled, autoFuel: true, autoCycle: true, autoClimb: true, autoClimbDetails: false}); setFormData({...formData, autoClimb: {...formData.autoClimb, startTime: matchTimer}}) }}
