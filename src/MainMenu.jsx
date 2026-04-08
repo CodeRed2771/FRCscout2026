@@ -6,7 +6,7 @@ import useLocalStorage from './utils/useLocalStorage';
 import send from './assets/icons/send.svg';
 import leaderboard from './assets/icons/leaderboard.svg';
 
-function MainMenu({uploadData, matches, hpMatches, pullTBA}) {
+function MainMenu({uploadData, matches, hpMatches, pullTBA, pitTeams, setTablet, tablet}) {
 
   return (
     <div className="main-menu tuff-load">
@@ -18,10 +18,20 @@ function MainMenu({uploadData, matches, hpMatches, pullTBA}) {
             <Link to="/humanplayer" className="nav-btn">Human Player Scout</Link>
             <div className="nav-btn-container">
               <Link to="/leaderboard" className="nav-btn"><img src={leaderboard}></img></Link>
-              <button className="nav-btn" id="send" onClick={() => uploadData(matches, hpMatches)}><img src={send}></img></button>
+              <button className="nav-btn" id="send" onClick={() => uploadData(matches, hpMatches, pitTeams)}><img src={send}></img></button>
               {
                 //<button className="nav-btn" onClick={() => pullTBA("2026miken")}>Pull TBA matches</button>
               }
+              <select value={tablet} onChange={(e) => { setTablet(e.target.value); window.localStorage.setItem("matchformData", ""); window.localStorage.setItem("hpformData", "")}} className="tabID"> 
+                <option value="Red 1">Red 1</option>
+                <option value="Red 2">Red 2</option>
+                <option value="Red 3">Red 3</option>
+                <option value="Blue 1">Blue 1</option>
+                <option value="Blue 2">Blue 2</option>
+                <option value="Blue 3">Blue 3</option>
+                <option value="Red Human Player">Red Human Player</option>
+                <option value="Blue Humsn Player">Blue Human Player</option>
+              </select>
             </div>
         </nav>
     </div>

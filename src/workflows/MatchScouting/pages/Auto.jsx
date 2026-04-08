@@ -47,6 +47,14 @@ function Auto({disabled, setDisabled, formData, setFormData, isActive, matchTime
           selected={formData.autoClimb.success}
           onClick={(val) => {setFormData({...formData, autoClimb: {...formData.autoClimb, success: val, successTime: val === "Yes" ? matchTimer : ""}})}}
         />
+
+        <SelectButtons
+          label="Estimated Fuel Scored"
+          values={[0, 5, 10, 20, 30, 40, 50, 70, 100]}
+          disabled={!isActive}
+          selected={formData.autoFuel}
+          onClick={(val) => setFormData({...formData, autoFuel: val})}
+        />
     </div>
   )
 }

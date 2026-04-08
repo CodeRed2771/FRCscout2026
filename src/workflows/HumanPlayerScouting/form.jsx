@@ -5,13 +5,30 @@ import Form from './pages/Form';
 import PageNav from '../../components/PageNav'
 import MatchClock from '../../components/MatchClock'
 
-function HumanPlayerForm({sethpMatches}) {
+function HumanPlayerForm({sethpMatches, triggerHaptic, tablet}) {
+  let alliance = tablet.substring(0, 4).replaceAll(' ', '') || "";
+  console.log(alliance)
+
   const submitMatch = async () => {
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbybdaASpBLSDEauSxvRpNhvoIA3iY_Jg7nRxIqp42YfYRjP9LDdZWgIQewSHeJVDvT3Xg/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyV1AxjUALeD7vlYJxLpw4NWgjkMXFPvv0KIhAIifkvnBgH-D8QvLfRdAdJ6qwrxiTBGQ/exec";
     const payload = {
       matchData: [],
-      hpData: formData
+      hpData: [formData],
+      pitData: []
     };
+
+    triggerHaptic();
+    setFormData({
+      scouter: formData.scouter,
+      matchNum: Number(formData.matchNum) + 1,
+      alliance: formData.alliance,
+      autoScores: 0,
+      teleScores: 0
+    });
+    setCurrentPage(0);
+    setMatchTimer(0);
+    setIsActive(false);
+    setIsPaused(false);
     
     try {
       const response = await fetch(WEB_APP_URL, {
@@ -30,24 +47,16 @@ function HumanPlayerForm({sethpMatches}) {
       console.log("Upload failed:", error);
     }
 
-    setFormData({
-      scouter: formData.scouter,
-      matchNum: Number(formData.matchNum) + 1,
-      alliance: formData.alliance,
-      scores: 0
-    });
-    setCurrentPage(0);
-    setMatchTimer(0);
-    setIsActive(false);
-    setIsPaused(false);
+
   }
 
   const [formData, setFormData] = useLocalStorage('hpformData',
     {
       scouter: "",
       matchNum: 1,
-      alliance: "",
-      scores: 0
+      alliance: alliance,
+      autoScores: 0,
+      teleScores: 0
     }
   );
 
@@ -63,11 +72,16 @@ function HumanPlayerForm({sethpMatches}) {
   const [matchTimer, setMatchTimer] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(false); // New state to handle the pause
+  const [disabled, setDisabled] = useLocalStorage('hpdisabled', {
+    shots: true
+  });
 
   useEffect(() => {
     let interval = null;
 
     if (isActive && !isPaused) {
+      setDisabled({...disabled, shots: false});
+
       interval = setInterval(() => {
         setMatchTimer((prev) => {
           // 1. Handle the 20-second pause
@@ -75,9 +89,6 @@ function HumanPlayerForm({sethpMatches}) {
             setIsPaused(true);
             setTimeout(() => {
               setIsPaused(false);
-              if(disabled.autoCycle === false) {
-                setDisabled({...disabled, autoClimb: false, autoFuel: false, autoCycle: true}), setFormData({...formData, autoCycles: {...formData.autoCycles, stops: [...formData.autoCycles.stops, matchTimer]}}) 
-              }
             }, 3000);
             return 20;
           }
@@ -92,6 +103,8 @@ function HumanPlayerForm({sethpMatches}) {
         });
       }, 1000);
     } else {
+      setDisabled({...disabled, shots: true});
+
       clearInterval(interval);
     }
 
@@ -99,7 +112,7 @@ function HumanPlayerForm({sethpMatches}) {
   }, [isActive, isPaused]);
 
   let pages = [
-    <Form submitMatch={submitMatch} formData={formData} setFormData={setFormData}/>,
+    <Form isActive={isActive} disabled={disabled} submitMatch={submitMatch} matchTimer={matchTimer} formData={formData} setFormData={setFormData}/>,
   ]
 
   const backToMain = () => {
@@ -136,12 +149,12 @@ function HumanPlayerForm({sethpMatches}) {
 
   const resetMatch = () => {
     if (window.confirm("Are you sure you want to reset the match? All current data will be lost.")) {
-      sethpMatches(prevMatches => [...prevMatches, formData]);
       setFormData({
         scouter: formData.scouter,
         matchNum: Number(formData.matchNum),
         alliance: formData.alliance,
-        scores: 0
+        autoScores: 0,
+        teleScores: 0
       });
       setCurrentPage(0);
       setMatchTimer(0);
@@ -153,12 +166,12 @@ function HumanPlayerForm({sethpMatches}) {
   return (
     <>
       <div className="form tuff-load">
-        <MatchClock disabled={(currentPage == 0)} timer={matchTimer} isActive={isActive} setIsActive={setIsActive} togglePause={togglePause} resetMatch={resetMatch} isPaused={isPaused}/>
+        <MatchClock disabled={false} timer={matchTimer} isActive={isActive} setIsActive={setIsActive} togglePause={togglePause} resetMatch={resetMatch} isPaused={isPaused}/>
 
         {renderPage()}
       </div>
 
-      <PageNav nextButton={true} handleBack={handleBack} backText={backText} handleNext={handleNext}/>
+      <PageNav disabled={{nextBtn: true}} handleBack={handleBack} backText={backText} handleNext={handleNext}/>
     </>
   )
 }

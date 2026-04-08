@@ -1,6 +1,6 @@
-const Counter = ({ label, count, increment, decrement, disabled, setDisabled }) => {
+const Counter = ({ label, count, increment, decrement, disabled }) => {
   return (
-    <div className="input-group">
+    <div style={{pointerEvents: disabled ? "none" : "unset", opacity: disabled ? "0.4" : "1"}} className="input-group">
       <label>{label}:</label>
       <div className="counter-buttons">
         <button className="counter-button" onClick={decrement}>-</button>

@@ -36,7 +36,7 @@ function MatchClock({ timer, disabled, isActive, setIsActive, resetMatch, toggle
                 >
                     {isPaused ? <img src={play}></img> : <img src={pause}></img>}
                 </button>
-                <div className={"clock"}>
+                <div className="clock">
                     {minutes}:{giveZeroes(seconds)}
                 </div>
                 <button

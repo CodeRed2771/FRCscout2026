@@ -7,7 +7,7 @@ import Counter from '../../../components/inputs/Counter.jsx'
 import Button from '../../../components/inputs/Button.jsx'
 import StartPos from '../../../assets/startpos.jpg'
 
-function Form({formData: formData, setFormData: setFormData, submitMatch}) {
+function Form({formData: formData, setFormData: setFormData, isActive, submitMatch, disabled, matchTimer}) {
   return (
     <div className="input-page">
         <h1>Human Player Scouting</h1>
@@ -29,14 +29,30 @@ function Form({formData: formData, setFormData: setFormData, submitMatch}) {
         />
         <Counter
             label="Shots Made"
-            count={formData.scores}
-            increment={() => setFormData({...formData, scores: formData.scores + 1})}
-            decrement={() => setFormData({...formData, scores: formData.scores != 0 ? formData.scores - 1 : 0})}
+            count={formData.autoScores + formData.teleScores}
+            disabled={disabled.shots}
+            increment={() => {
+                setFormData(prev => ({
+                    ...prev,
+                    autoScores: matchTimer <= 20 ? prev.autoScores + 1 : prev.autoScores,
+                    teleScores: matchTimer > 20 ? prev.teleScores + 1 : prev.teleScores
+                }));
+            }}
+
+                // Decrement Function
+            decrement={() => {
+                setFormData(prev => ({
+                    ...prev,
+                    autoScores: matchTimer <= 20 ? Math.max(0, prev.autoScores - 1) : prev.autoScores,
+                    teleScores: matchTimer > 20 ? Math.max(0, prev.teleScores - 1) : prev.teleScores
+                }));
+            }}
         />
 
         <Button
             label="Submit Match"
             onClick={submitMatch}
+            disabled={isActive}
             type="submit"
         />
     </div>

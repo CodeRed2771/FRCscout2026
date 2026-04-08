@@ -1,6 +1,6 @@
 const SelectButtons = ({ label, values, selected, onClick, disabled, setDisabled }) => {
   return (
-    <div className="input-group" style={{pointerEvents: disabled ? "none" : "unset", opacity: disabled ? "0.4" : "1"}}>
+    <div className="input-group selectButtons" style={{pointerEvents: disabled ? "none" : "unset", opacity: disabled ? "0.4" : "1"}}>
       <label>{label}:</label>
       <div className="select-buttons">
         {values.map((value) => {

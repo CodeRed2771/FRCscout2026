@@ -3,9 +3,10 @@
 }
 
 input, textarea, button, select {
-  background-color: #291e1e; /* Or a specific dark hex code like #404040 */
+  background-color: #382121; /* Or a specific dark hex code like #404040 */
   color: inherit; /* This pulls your white text color from :root */
   font-family: inherit; /* Makes sure they use Montserrat */
+  box-shadow: 0 10px 20px rgba(255, 17, 17, 0.15);
 }
 
 .logo-main {
@@ -30,7 +31,8 @@ input, textarea, button, select {
   width: 350px;
 }
 
-.nav-btn {
+.nav-btn,
+.tabID {
   background-color: #291919;
   border: 2px solid var(--med-accent);
   padding: 8px;
@@ -44,6 +46,54 @@ input, textarea, button, select {
   width: 100%;
 }
 
+.tabID {
+  flex: 4;
+  appearance: none;     /* Removes default browser styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: block;
+  color: rgb(172, 255, 172);
+}
+
+select:hover {
+}
+
+select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.tabID option {
+  font-size: 19px;
+  margin: 0;
+  text-align: center;
+  padding: 0;
+  appearance: none;     /* Removes default browser styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-left: 0;
+  text-indent: 0;
+  margin: 0;
+}
+
+/* Custom Arrow using a CSS shape */
+.arrow {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 0; 
+  height: 0; 
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #ffffff;
+  pointer-events: none; /* Allows clicks to pass through to the select */
+}
+
 .nav-btn-container {
   width: 100%;
   display: flex;
@@ -52,6 +102,7 @@ input, textarea, button, select {
 
 .nav-btn-container .nav-btn {
   display: flex;
+  flex: 1;
   justify-content: center;
   align-items: center;
 }
@@ -72,7 +123,7 @@ input, textarea, button, select {
   width: 95vw;
   height: 95vh;
   max-width: 900px;
-  background-color: #1a1515;
+  background-color: #1f1616;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -80,6 +131,8 @@ input, textarea, button, select {
   border: 2px solid var(--light-accent);
   position: relative;
   padding-top: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 button {
@@ -136,6 +189,8 @@ button {
 .input-group label {
   text-align: right;
   font-size: 22px;
+  min-width: max-content;
+  max-width: 40%;
 }
 
 input::-webkit-outer-spin-button,
@@ -167,24 +222,26 @@ input::-webkit-inner-spin-button {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
+  flex: 1;
 } 
 
 .select-buttons button {
   padding: 7px;
   border-radius: 5px;
   font-size: 20px;
-  min-width: 65px;
+  min-width: max-content;
+  flex-grow: 1;
   min-height: 45px;
   border: 2px solid var(--med-accent);
 }
 
 .select-buttons button:hover {
   border: 2px solid var(--light-accent);
-  scale: 1.06;
 }
 
 .form button {
-  background-color: #291e1e;
+  background-color: #382121;
 }
 
 .counter-buttons {
@@ -232,7 +289,7 @@ input::-webkit-inner-spin-button {
 }
 
 .buttonSelected {
-  scale: 1.15;
+  scale: 1.10;
   border: 2px solid var(--light-accent) !important;
   background-color: #582a2a !important;
 }
@@ -242,7 +299,8 @@ input::-webkit-inner-spin-button {
   border-radius: 8px;
   font-size: 22px;
   width: 500px;
-  height: 200px;
+  max-width: 90%;
+  min-height: 100px;
 }
 
 .climbing {
@@ -271,6 +329,8 @@ input::-webkit-inner-spin-button {
   padding-left: 10px;
   padding-right: 10px;
   color: rgb(255, 187, 187);
+  box-shadow: 0 10px 20px rgba(255, 17, 17, 0.15);
+  z-index: 7;
 }
 
 .clockContainer {
@@ -298,6 +358,7 @@ input::-webkit-inner-spin-button {
   border: none;
   background-color: transparent !important;
   padding: 0px;
+  box-shadow: none !important;
 }
 
 .clock-button img {
@@ -313,6 +374,8 @@ input::-webkit-inner-spin-button {
   height: 150px;
   width: 450px;
   border-radius: 8px;
+  font-size: 16px;
+  padding: 5px;
 }
 
 .submit {
@@ -358,12 +421,14 @@ table {
     border-collapse: collapse;
     border-radius: 10px;
     overflow: hidden;
+    margin-bottom: 20px;
 }
 
 th, td {
     padding: 9px 15px;
     text-align: center;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid #463131;
+    max-width: 200px;
 }
 
 th {
@@ -372,11 +437,11 @@ th {
 }
 
 tr {
-  background-color: #2a2a2a;
+  background-color: #2e2424;
 }
 
 tr:hover {
-    background-color: #2a2a2a;
+    background-color: #2e2424;
     cursor: pointer;
 }
 
@@ -396,4 +461,174 @@ tr:hover {
 
 .tuff-load {
   animation: slideInTuff 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.stat-page {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.stat-page h1 {
+  font-size: 26px;
+}
+
+/* General Reset for the Input */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  border-radius: 15px;
+  height: 17px;
+  background: #4b3131; /* The background color (empty part) */
+  box-shadow: 10px 10px 20px rgba(255, 17, 17, 0.15);
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Chrome, Safari, Edge and Opera --- */
+
+/* The Track */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 8px;
+  background: #4b3131;
+  border-radius: 16px;
+}
+
+/* The Thumb (The Handle) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  background-color: #9b2828; /* Red Thumb */
+  border-radius: 50%;
+  margin-top: -4px; /* Centers thumb on the track */
+}
+
+/* To get the red "fill" in Webkit, we usually use a background gradient 
+   on the track itself that we update with JS, OR a very large box-shadow 
+   on the thumb (trick shown below) */
+
+input[type="range"] {
+  overflow: hidden; /* Clips the box-shadow fill */
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  /* This box-shadow creates the red "fill" to the left of the thumb */
+  box-shadow: -407px 0 0 400px #9b2828; 
+}
+
+/* --- Firefox --- */
+
+/* The Fill (Firefox makes this easy!) */
+input[type="range"]::-moz-range-progress {
+  background-color: #9b2828; 
+  height: 8px;
+  border-radius: 16px;
+}
+
+input[type="range"]::-moz-range-track {  
+  background-color: #ccc;
+  height: 8px;
+  border-radius: 16px;
+}
+
+input[type="range"]::-moz-range-thumb {
+  height: 16px;
+  width: 16px;
+  background-color: #9b2828;
+  border-radius: 50%;
+  border: 1px solid #fff;
+}
+
+.progBar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.progBar p {
+  min-width: max-content;
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+}
+
+.progBar p:last-child {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.team-card {
+  display: flex;
+  background-color: rgb(54, 54, 54);
+  border-radius: 7px;
+  margin: 3px;
+  justify-content: center;
+  gap: 0px;
+  padding: 0;
+}
+
+.team-card img {
+  scale: 0.9;
+  margin: 0;
+  padding: 0;
+}
+
+.progressTable td {
+  padding: 0;
+}
+
+.cells {
+  display: flex;
+  padding: 3px;
+  justify-content: center;
+  align-items: center;
+}
+
+.stats-nav {
+  display: flex;
+  height: 45px;
+  width: 90%;
+  gap: 8px;
+}
+
+.stats-nav .stat-nav-btn { 
+  font-size: 16px;
+  padding: 5px !important;
+  height: 35px;
+  min-width: max-content;
+  min-height: max-content;
+}
+
+.schedule-table .team-card {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.schedule-table td {
+  padding: 5px;
+}
+
+.prog-page {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 95vw;
+  padding: 2.5vw;
+  background-color: #443232;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.prog-page h2 {
+  font-weight: 400;
+}
+
+.prog-page table {
+  margin-bottom: 0px;
 }

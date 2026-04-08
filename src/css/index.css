@@ -4,7 +4,7 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 224, 224, 0.96) !important;
+  color: rgba(255, 206, 206, 1) !important;
   background-color: #141010;
 
   font-synthesis: none;
@@ -21,7 +21,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: scale 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {

@@ -8,34 +8,21 @@ import PostMatch from './pages/PostMatch'
 import '../../css/App.css'
 import useLocalStorage from '../../utils/useLocalStorage';
 
-function MatchScoutingForm({matches, setMatches, TBAdata}) {
+function MatchScoutingForm({matches, setMatches, TBAdata, triggerHaptic, tablet}) {  
+  let alliance = tablet.substring(0, 4).replaceAll(' ', '') || "";
+  let robot = tablet.substring(4,6).replaceAll(' ', '') || "";
+
   const submitMatch = async () => {
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbybdaASpBLSDEauSxvRpNhvoIA3iY_Jg7nRxIqp42YfYRjP9LDdZWgIQewSHeJVDvT3Xg/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyV1AxjUALeD7vlYJxLpw4NWgjkMXFPvv0KIhAIifkvnBgH-D8QvLfRdAdJ6qwrxiTBGQ/exec";
     const payload = {
-      matchData: formData,
-      hpData: []
+      matchData: [formData],
+      hpData: [],
+      pitData: []
     };
-    
-    try {
-      const response = await fetch(WEB_APP_URL, {
-        method: "POST",
-        mode: "no-cors", // Required for Google Apps Script redirects
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      console.log("Data successfully sent!");
-    } catch (error) {
-      setMatches(prevMatches => [...prevMatches, formData]);
-
-      console.log("Upload failed:", error);
-    }
 
     setFormData({
       scouter: formData.scouter,
-      teamNum: "",
+      teamNum: robot != "" && robot != "H" && robot != "Hu" ? TBAdata[formData.matchNum].alliances[alliance.toLowerCase()].team_keys[robot - 1].substring(3) : "",
       matchNum: Number(formData.matchNum) + 1,
       startPos: "",
       autoClimb: {
@@ -44,6 +31,7 @@ function MatchScoutingForm({matches, setMatches, TBAdata}) {
         success: "No",
         successTime: ""
       },
+      autoFuel: 0,
       teleClimb: {
         startTime: "",
         location: "",
@@ -82,12 +70,31 @@ function MatchScoutingForm({matches, setMatches, TBAdata}) {
     setIsActive(false);
     setIsPaused(false);
     setBackText("Back To Main")
+
+    triggerHaptic();
+    
+    try {
+      const response = await fetch(WEB_APP_URL, {
+        method: "POST",
+        mode: "no-cors", // Required for Google Apps Script redirects
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      console.log("Data successfully sent!");
+    } catch (error) {
+      setMatches(prevMatches => [...prevMatches, formData]);
+
+      console.log("Upload failed:", error);
+    }
   }
 
   const [formData, setFormData] = useLocalStorage('matchformData',
     {
       scouter: "",
-      teamNum: "",
+      teamNum: robot != "" && robot != "H" && robot != "Hu" ? TBAdata[0].alliances[alliance.toLowerCase()].team_keys[robot - 1].substring(3) : "",
       matchNum: 1,
       startPos: "",
       autoCycles: {
@@ -100,6 +107,7 @@ function MatchScoutingForm({matches, setMatches, TBAdata}) {
         success: "",
         successTime: ""
       },
+      autoFuel: 0,
       teleCycles: {
         starts: [],
         stops: []
@@ -224,11 +232,12 @@ useEffect(() => {
     if (window.confirm("Are you sure you want to reset the match? All current data will be lost.")) {
       setFormData({
         scouter: formData.scouter, // Keeps the scouter name so they don't have to retype it
-        teamNum: "",
+        teamNum: robot != "" && robot != "H" && robot != "Hu" ? TBAdata[formData.matchNum - 1].alliances[alliance.toLowerCase()].team_keys[robot - 1].substring(3) : "",
         matchNum: formData.matchNum, // Keeps the current match number
         startPos: "",
         autoCycles: { starts: [], stops: [] },
         autoClimb: { startTime: "", location: "", success: "", successTime: "" },
+        autoFuel: 0,
         teleCycles: { starts: [], stops: [] },
         teleClimb: { startTime: "", location: "", level: "", success: "", successTime: "" },
         comments: "",
