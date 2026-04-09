@@ -61,7 +61,7 @@ function App() {
           setError(null);
           
           // 2. Call the function passed via props
-          const result = await pullTBA("2026mimus");
+          const result = await pullTBA("2026miken");
           setTBAdata(result.sort((a, b) => Number(a.match_number) - Number(b.match_number)));
       } catch (err) {
           setError(err.message || 'Something went wrong');
@@ -83,7 +83,7 @@ function App() {
           setError(null);
           
           // 2. Call the function passed via props
-          const result = await pullTBAteams("2026mimus");
+          const result = await pullTBAteams("2026miken");
           setTBAteams(result.sort((a, b) => Number(a.team_number) - Number(b.team_number)));
       } catch (err) {
           setError(err.message || 'Something went wrong');
