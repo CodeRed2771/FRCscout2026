@@ -439,7 +439,7 @@ function Leaderboard({fetchData, compData, teamData}) {
                 ) : (
                     <>
                         {currentPage === "Leaderboard" && lead(data, comp)}
-                        {currentPage === "Progress" && progress(data, "Muskegon")}
+                        {currentPage === "Progress" && progress(data, "Kentwood")}
                         {currentPage === "Match Schedule" && schedule(compData)}
                     </>
                 )}
