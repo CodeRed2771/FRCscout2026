@@ -63,6 +63,7 @@ function Leaderboard({fetchData, compData, teamData}) {
             const result = await fetchData();
             setData(result);
         } catch (err) {
+            setLoading(false);
             setError(err.message || 'Something went wrong');
         } finally {
             setLoading(false);
@@ -189,7 +190,7 @@ function Leaderboard({fetchData, compData, teamData}) {
             });
         }
 
-        if (!compSorted[0]) return "There is no data for this competition yet..."
+        if (!teamData[0]) return "There is no data for this competition yet..."
     
         let matchCt = truncatedCompData.length
 
