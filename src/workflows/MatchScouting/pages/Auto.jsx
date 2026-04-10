@@ -8,7 +8,7 @@ import Button from '../../../components/inputs/Button.jsx'
 
 function Auto({disabled, setDisabled, formData, setFormData, isActive, matchTimer}) {
   return (
-    <div style={{pointerEvents: !isActive ? "none" : "unset", opacity: !isActive ? "0.5" : "1"}} className="input-page">
+    <div className="input-page">
         <h1>Auto</h1>
 
         <Button
